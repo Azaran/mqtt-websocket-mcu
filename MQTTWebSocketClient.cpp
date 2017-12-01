@@ -8,11 +8,11 @@ void MQTTWebSocketClient::webSocketEvent(WStype_t type, uint8_t * payload, size_
 
     switch(type) {
         case WStype_DISCONNECTED:
-            DEBUG_WEBSOCKET_MQTT("[AWSc] Disconnected!\n");
+            DEBUG_WEBSOCKET_MQTT("[WSc] Disconnected!\n");
 			MQTTWebSocketClient::instance->stop ();			
             break;
         case WStype_CONNECTED:            
-            DEBUG_WEBSOCKET_MQTT("[AWSc] Connected to url: %s\n",  payload);
+            DEBUG_WEBSOCKET_MQTT("[WSc] Connected to url: %s\n",  payload);
 			MQTTWebSocketClient::instance->_connected = true;
             break;
         case WStype_TEXT:
