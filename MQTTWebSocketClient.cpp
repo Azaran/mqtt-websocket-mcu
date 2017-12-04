@@ -8,22 +8,19 @@ void MQTTWebSocketClient::webSocketEvent(WStype_t type, uint8_t * payload, size_
 
     switch(type) {
         case WStype_DISCONNECTED:
-            Serial.println("[WSc] Disconnected!");
+            DEBUG_WEBSOCKET_MQTT("[WSc] Disconnected!");
 			MQTTWebSocketClient::instance->stop ();
             break;
         case WStype_CONNECTED:
-            Serial.print("[WSc] Connected to url:");
-            Serial.println(*payload);
+            DEBUG_WEBSOCKET_MQTT("[WSc] Connected to url: %s ", payload);
 			MQTTWebSocketClient::instance->_connected = true;
             break;
         case WStype_TEXT:
-            Serial.print("[WSc] get text:");
-            Serial.println(*payload);
+            DEBUG_WEBSOCKET_MQTT("[WSc] get text: %s", *payload);
             MQTTWebSocketClient::instance->putMessage (payload, length);
             break;
         case WStype_BIN:
-            Serial.print("[WSc] get binary length:");
-          Serial.println(length);
+            DEBUG_WEBSOCKET_MQTT("[WSc] get binary length: %s", length);
             //hexdump(payload, length);
             MQTTWebSocketClient::instance->putMessage (payload, length);
             break;
